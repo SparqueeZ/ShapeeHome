@@ -1,0 +1,140 @@
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Thin.eot");
+  src: url("fonts/nohemi/Nohemi-Thin.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Thin.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Thin.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-ExtraLight.eot");
+  src: url("fonts/nohemi/Nohemi-ExtraLight.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-ExtraLight.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-ExtraLight.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Light.eot");
+  src: url("fonts/nohemi/Nohemi-Light.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Light.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Light.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Regular.eot");
+  src: url("fonts/nohemi/Nohemi-Regular.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Regular.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Regular.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Medium.eot");
+  src: url("fonts/nohemi/Nohemi-Medium.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Medium.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Medium.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-SemiBold.eot");
+  src: url("fonts/nohemi/Nohemi-SemiBold.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-SemiBold.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-SemiBold.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Bold.eot");
+  src: url("fonts/nohemi/Nohemi-Bold.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Bold.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Bold.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-ExtraBold.eot");
+  src: url("fonts/nohemi/Nohemi-ExtraBold.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-ExtraBold.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-ExtraBold.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Nohemi";
+  src: url("fonts/nohemi/Nohemi-Black.eot");
+  src: url("fonts/nohemi/Nohemi-Black.eot") format("embedded-opentype"),
+    url("fonts/nohemi/Nohemi-Black.woff2") format("woff2"),
+    url("fonts/nohemi/Nohemi-Black.woff") format("woff"),
+    url("fonts/nohemi/Nohemi-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  /* Retrait des margins et paddings */
+  margin: 0;
+  padding: 0;
+  font-family: "Nohemi";
+}
+
+/* :root {
+  --main-bg-color: #fff;
+  --main-color: #030f10;
+  --primary-color: #fbc723;
+  color: #030f10;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --main-bg-color: #030f10;
+    --main-color: #fff;
+    color: #fff;
+  }
+} */
+:root,
+html {
+  --primary-color: #fbc723;
+  max-width: 100vw;
+  scroll-behavior: smooth;
+}
+
+/* Large desktop screens */
+@media (min-width: 1440px) {
+}
+/* Small desktop screens */
+@media (min-width: 1440px) and (max-width: 1440px) {
+}
+/* Tablet screens */
+@media (min-width: 1024px) and (max-width: 1440px) {
+}
+/* Mobile screens (landscape) */
+@media (min-width: 768px) and (max-width: 1024px) {
+}
+/* Mobile screens (portrait) */
+@media (max-width: 768px) {
+}
