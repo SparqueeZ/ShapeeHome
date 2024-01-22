@@ -233,7 +233,7 @@ onMounted(() => {
   setInterval(() => {
     changeHeroTitle();
   }, 5000);
-  emits("changeColorScheme", forceDarkMode());
+  emits("changeColorScheme", "dark");
 });
 </script>
 

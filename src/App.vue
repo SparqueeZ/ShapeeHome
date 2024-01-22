@@ -74,8 +74,12 @@ onMounted(() => {
   &.light {
     /* Déclaration des variables de couleur */
     --main-bg-color: #fff;
+    --secondary-bg-color: #ebeff7;
+    --third-bg-color: rgb(217, 224, 235);
+
     --main-color: #030f10;
     --secondary-color: #3e4146;
+    --btn-border-color: #323635;
     color: #030f10;
   }
   &.dark {
@@ -85,6 +89,7 @@ onMounted(() => {
     --main-color: #fff;
     --secondary-color: #b0b7c5;
     --third-color: #8e9aaf;
+    --btn-border-color: #323635;
     color: #fff;
   }
 
@@ -95,10 +100,10 @@ onMounted(() => {
       display: flex;
       gap: 0.5rem;
       padding: 0.7rem 1.2rem;
-      background-color: var(--main-bg-color);
+      background-color: transparent;
       transition: all 0.2s ease-out;
 
-      border: var(--second-bg-color) solid 1px;
+      border: var(--btn-border-color) solid 1px;
       border-radius: 0.3rem;
       p {
         font-family: "Montserrat";
@@ -110,10 +115,17 @@ onMounted(() => {
         rotate: 90deg;
         fill: var(--main-color);
       }
-    }
 
-    &:hover {
-      .btn {
+      &.alt {
+        border: none;
+        text-decoration: underline;
+
+        &:hover {
+          background-color: transparent;
+          color: var(--primary-color);
+        }
+      }
+      &:hover {
         background-color: var(--third-bg-color);
       }
     }

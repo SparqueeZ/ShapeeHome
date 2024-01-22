@@ -42,7 +42,7 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactez-nous">
+          <a href="/devis">
             <div class="btn">
               <p>Lancer mon projet</p>
               <Icon name="boxedArrow" />
@@ -118,7 +118,7 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactez-nous">
+          <a href="/devis">
             <div class="btn">
               <p>Lancer mon projet</p>
               <Icon name="boxedArrow" />
@@ -195,7 +195,7 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactez-nous">
+          <a href="/devis">
             <div class="btn">
               <p>Lancer mon projet</p>
               <Icon name="boxedArrow" />
