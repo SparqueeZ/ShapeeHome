@@ -5,7 +5,7 @@
       <meta name="author" content="Shapee" />
       <meta
         name="description"
-        content="Donnons forme a votre projet ! Shapee est une agence web basee a Angers(49000) specialisee dans la creation de sites et d'applications web."
+        content="Donnons forme a votre projet ! Shapee est une agence de création de site / application web basee a Angers(49000). Un devis ? Un projet web ? N'hésitez pas nous sommes ouvert à toutes vos propositions."
       />
       <meta
         name="subject"
@@ -29,6 +29,9 @@
       <meta
         name="keywords"
         content="
+        Devis site internet,
+        Devis site internet Angers,
+        Devis site internet Réunion,
         Agence de création de site web,
         Agence de création de site web Angers,
         Agence de création de site web Réunion,
@@ -162,7 +165,7 @@
         imgWidth="94%"
         title="Nous réalisons des sites qui vous ressemblent"
         text="Nos sites sont totalement à l'image de leurs propriétaires, nos réalisation sont originales et nous nous efforçons de créer des sites qui correspondent à la vision voulue."
-        btnTitle="Nos réalisations"
+        btnTitle="Nous contacter"
         btnLink="#contactez-nous"
         btnIcon="boxedArrow"
         categoryTitle="Réalisations"

@@ -20,6 +20,7 @@ const tools = ref([
   { name: "HTML", iconName: "toolHTML" },
   { name: "CSS", iconName: "toolCSS" },
   { name: "JS", iconName: "toolJS" },
+  { name: "VueJS", iconName: "toolVueJS" },
 ]);
 </script>
 

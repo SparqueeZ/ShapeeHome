@@ -42,10 +42,11 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactForm">
-            <button class="CTABtnAlt" @click="formChoice = 3">
-              Lancer mon projet
-            </button>
+          <a href="#contactez-nous">
+            <div class="btn">
+              <p>Lancer mon projet</p>
+              <Icon name="boxedArrow" />
+            </div>
           </a>
           <div class="separator"></div>
 
@@ -117,10 +118,11 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactForm">
-            <button class="CTABtnAlt" @click="formChoice = 3">
-              Lancer mon projet
-            </button>
+          <a href="#contactez-nous">
+            <div class="btn">
+              <p>Lancer mon projet</p>
+              <Icon name="boxedArrow" />
+            </div>
           </a>
           <div class="separator"></div>
 
@@ -193,10 +195,11 @@
           </div>
 
           <div class="separator"></div>
-          <a href="#contactForm">
-            <button class="CTABtnAlt" @click="formChoice = 3">
-              Lancer mon projet
-            </button>
+          <a href="#contactez-nous">
+            <div class="btn">
+              <p>Lancer mon projet</p>
+              <Icon name="boxedArrow" />
+            </div>
           </a>
           <div class="separator"></div>
 

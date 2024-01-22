@@ -280,7 +280,7 @@ const sendContactForm = () => {
         outline: none;
         width: 100%;
         font-family: "Montserrat";
-        margin: 0.8rem 0;
+        margin: 0.8rem 0 0 0;
         font-size: 16px;
         background-color: var(--third-bg-color);
         color: var(--main-color);
