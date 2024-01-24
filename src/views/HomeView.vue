@@ -266,7 +266,6 @@ onMounted(() => {
 <style lang="scss" scoped>
 main {
   background-color: var(--main-bg-color);
-  width: 100%;
 
   .page {
     position: relative;

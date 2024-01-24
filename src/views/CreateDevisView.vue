@@ -1,6 +1,8 @@
 <template>
   <main>
-    <Head></Head>
+    <Head>
+      <link rel="canonical" href="https://www.shapee.re/devis" />
+    </Head>
     <section class="page">
       <header>
         <SwitchColorScheme

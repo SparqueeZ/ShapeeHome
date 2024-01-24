@@ -65,20 +65,59 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
+#app {
+  overflow: hidden;
+}
+
 .ApplicationView {
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
   overflow-x: hidden;
-  overflow-y: hidden;
-  width: 100vw;
-  min-height: 100vh;
+
+  .page {
+    background-color: var(--main-bg-color);
+    height: 100%;
+    width: 100%;
+  }
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+    background-color: transparent;
+  }
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background-color: #888;
+    transition: all 0.9s ease-out;
+    &:hover {
+      background-color: #555;
+      transition: all 0.9s ease-out;
+    }
+  }
+
+  --dark-color: #030f10;
+  --light-color: #fff;
+  --red: #f64d60;
+  --orange: #ffa800;
+  --green: #00e097;
+
+  --lightblue: #ebeff7;
+  --lightblue-alt: #8d99ae;
 
   &.light {
     /* Déclaration des variables de couleur */
     --main-bg-color: #fff;
-    --secondary-bg-color: #ebeff7;
+    --second-bg-color: #ebeff7;
     --third-bg-color: rgb(217, 224, 235);
 
     --main-color: #030f10;
     --secondary-color: #3e4146;
+    --third-color: #8e9aaf;
+
     --btn-border-color: #323635;
     color: #030f10;
   }
@@ -127,6 +166,7 @@ onMounted(() => {
       }
       &:hover {
         background-color: var(--third-bg-color);
+        cursor: pointer;
       }
     }
   }
