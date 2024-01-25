@@ -18,7 +18,7 @@ const router = createRouter({
       component: CreateDevisVue,
     },
     {
-      path: "/estimation",
+      path: "/devis-personnalise",
       component: Estimation,
     },
     {

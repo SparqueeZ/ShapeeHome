@@ -40,7 +40,7 @@ const choiceList = ref([
   {
     title: "Créer un site web",
     description:
-      "Peut être envie de travailler avec moi ? N'attenez plus ! Lancez un projet.",
+      "Un site web personnalisé codé ou fait avec WordPress ? C'est l'option !",
     timing: "3 min.",
     choiceNumber: "1",
     img: choice1,
@@ -50,7 +50,7 @@ const choiceList = ref([
   {
     title: "Réaliser une refonte de site web",
     description:
-      "Peut être envie de travailler avec moi ? N'attenez plus ! Lancez un projet.",
+      "Besoin d'un coup de pinceau sur votre site internet ? N'attendez plus !",
     timing: "2 min.",
     choiceNumber: "2",
     img: choice2,
@@ -60,7 +60,7 @@ const choiceList = ref([
   {
     title: "Réaliser une application web",
     description:
-      "Peut être envie de travailler avec moi ? N'attenez plus ! Lancez un projet.",
+      "Une application web pour vous aider à egérer votre entreprise ? Je serais à votre écoute.",
     timing: "5 min.",
     choiceNumber: "3",
     img: choice3,
@@ -71,10 +71,11 @@ const choiceList = ref([
 
 onMounted(() => {
   let saveDevis = localStorage.getItem("devis");
-  saveDevis = JSON.parse(saveDevis);
-  console.log(saveDevis.step1);
-  choice.value = saveDevis.step1;
-  document.getElementById(`choice${saveDevis.step1}`).click();
+  if (saveDevis) {
+    saveDevis = JSON.parse(saveDevis);
+    choice.value = saveDevis[1];
+    document.getElementById(`choice${saveDevis[1].selected}`).click();
+  }
 });
 </script>
 
@@ -85,6 +86,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 
   .choiceContainer {
     height: 80%;
@@ -99,6 +101,7 @@ onMounted(() => {
 
     .choiceItem {
       height: 100%;
+      width: 25%;
       max-width: 420px;
       display: flex;
       flex-direction: row;
@@ -144,7 +147,8 @@ onMounted(() => {
 
           h2 {
             font-weight: 800;
-            font-size: 24px;
+            font-size: 1.3rem;
+            font-family: "Montserrat";
           }
 
           .timing {
@@ -161,32 +165,16 @@ onMounted(() => {
             }
             p {
               font-weight: 600;
-              font-size: 12px;
+              font-size: 0.8rem;
+              font-family: "Montserrat";
               color: var(--main-color);
             }
           }
 
           .description {
             margin-top: 0.5rem;
-          }
-        }
-
-        .timing {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 0.3rem;
-          margin-top: -10px;
-          .icon {
-            display: block;
-            width: 15px;
-            height: 15px;
-            fill: var(--main-color);
-          }
-          p {
-            font-weight: 600;
-            font-size: 12px;
-            color: var(--main-color);
+            font-family: "Montserrat";
+            font-size: 1rem;
           }
         }
 
@@ -251,7 +239,12 @@ onMounted(() => {
         border-radius: 0.5rem;
         padding: 1rem;
         text-align: center;
-        box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
+        // box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
+        box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
+          /* shadow ring 👇 */ 0 0 0 1px hsla(0, 0%, 0%, 0.05),
+          /* multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
+          0 0.9px 1.5px hsla(0, 0%, 0%, 0.045),
+          0 3.5px 6px hsla(0, 0%, 0%, 0.09);
         position: relative;
         &:hover {
           scale: 1.025;

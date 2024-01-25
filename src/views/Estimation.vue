@@ -1,5 +1,21 @@
 <template>
   <main>
+    <Transition name="reduceOpacity">
+      <confirmBox
+        v-if="tryToLeaveParent"
+        :tryToLeave="tryToLeaveParent"
+        title="Etes-vous sûr de vouloir quitter ?"
+        message="En quittant cette page, votre progressions sera sauvegardée, et
+    vous pourrez revenir plus tard."
+        infosIcon="warning"
+        confirmBtn="Quitter"
+        confirmURL="/"
+        confirmIcon="cancel"
+        cancelBtn="Continuer"
+        cancelURL=""
+        cancelIcon="arrow"
+        @handleCancel="handleCancel"
+    /></Transition>
     <header>
       <SwitchColorScheme
         :colorScheme="colorScheme"
@@ -11,6 +27,11 @@
       />
     </header>
     <TransitionGroup :name="stepTransition">
+      <step0
+        v-if="step === 0"
+        @saveChoice="saveChoice"
+        @startForm="determineStepTransition(step + 1)"
+      />
       <step1 v-if="step === 1" @saveChoice="saveChoice" />
       <step2 v-else-if="step === 2" />
       <step3 v-else-if="step === 3" />
@@ -24,7 +45,7 @@
       <step11 v-else-if="step === 11" />
       <step12 v-else-if="step === 12" />
     </TransitionGroup>
-    <footer>
+    <footer v-if="step >= 1">
       <div class="actionsBtn">
         <a @click="determineStepTransition(step - 1)">
           <div class="btn alt">
@@ -43,7 +64,9 @@
 </template>
 
 <script setup>
+import confirmBox from "@/components/lib/confirmBox.vue";
 import SwitchColorScheme from "@/components/header/SwitchColorScheme.vue";
+import step0 from "@/views/CreateDevisView.vue";
 import step1 from "@/components/estimation/step1.vue";
 import step2 from "@/components/estimation/step2.vue";
 import step3 from "@/components/estimation/step3.vue";
@@ -63,16 +86,22 @@ const props = defineProps({
   colorScheme: String,
 });
 
-const step = ref(1);
+const tryToLeaveParent = ref(false);
+const step = ref(0);
 const stepTransition = ref("stepTransition");
 
 const determineStepTransition = (newStep) => {
-  if (newStep >= 1 && newStep <= 12) {
+  if (newStep < 0) {
+    tryToLeaveParent.value = true;
+  }
+  if (newStep >= -1 && newStep <= 12) {
     if (newStep >= step.value) {
       stepTransition.value = "stepTransition";
+      console.log(stepTransition.value);
       step.value = newStep;
     } else {
       stepTransition.value = "stepTransitionReverse";
+      console.log(stepTransition.value);
       step.value = newStep;
     }
   } else {
@@ -81,34 +110,51 @@ const determineStepTransition = (newStep) => {
 };
 
 const saveChoice = (step, value) => {
-  console.log("Etape:", step, " Choix numéro:", value);
-  const choiceResume = {
-    step1: 0,
-    step2: 0,
-    step3: 0,
-    step4: 0,
-    step5: 0,
-    step6: 0,
-    step8: 0,
-    step9: 0,
-    step10: 0,
-    step11: 0,
-    step12: 0,
-  };
-
-  choiceResume.step1 = value;
-
-  const localStorageItem = localStorage.getItem("devis");
-  if (!localStorageItem) {
-    console.log("Rien dans le localStorage");
+  const localStorageItem = JSON.parse(localStorage.getItem("devis"));
+  if (localStorageItem) {
+    localStorageItem[step].selected = value;
+    localStorage.setItem("devis", JSON.stringify(localStorageItem));
+  } else {
+    const choiceResumeNew = [
+      { created: "25/01/2024" },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+    ];
+    localStorage.setItem("devis", JSON.stringify(choiceResumeNew));
   }
-  localStorage.setItem("devis", JSON.stringify(choiceResume));
 };
+const handleCancel = () => {
+  tryToLeaveParent.value = false;
+};
+
+onMounted(() => {
+  // let localStorageItem = localStorage.getItem("devis");
+  // if (localStorageItem) {
+  //   localStorageItem = JSON.parse(localStorageItem);
+  //   let i = 0;
+  //   localStorageItem.forEach((step) => {
+  //     if (step.selected === 0) {
+  //       i += 1;
+  //     }
+  //   });
+  //   step.value = 13 - i;
+  // }
+});
 </script>
 
 <style lang="scss" scoped>
 main {
-  position: relative;
+  background-color: var(--main-bg-color);
 
   header {
     position: absolute;
@@ -164,5 +210,14 @@ main {
 }
 .stepTransitionReverse-leave-to {
   transform: translateX(100%);
+}
+
+.reduceOpacity-enter-active,
+.reduceOpacity-leave-active {
+  transition: all 0.3s ease-in-out;
+}
+.reduceOpacity-enter-from,
+.reduceOpacity-leave-to {
+  opacity: 0;
 }
 </style>

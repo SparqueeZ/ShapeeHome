@@ -1,6 +1,6 @@
 {
   "name": "shapee",
-  "version": "1.0.5",
+  "version": "1.0.12",
   "private": true,
   "type": "module",
   "scripts": {

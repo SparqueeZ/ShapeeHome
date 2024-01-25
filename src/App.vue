@@ -67,35 +67,37 @@ onMounted(() => {
 <style lang="scss">
 #app {
   overflow: hidden;
+  position: relative;
 }
 
 .ApplicationView {
   width: 100%;
-  height: 100vh;
-  overflow-y: auto;
-  overflow-x: hidden;
+  height: 100svh;
 
   .page {
     background-color: var(--main-bg-color);
     height: 100%;
     width: 100%;
-  }
-  /* width */
-  &::-webkit-scrollbar {
-    width: 5px;
-    background-color: transparent;
-  }
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
-  }
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background-color: #888;
-    transition: all 0.9s ease-out;
-    &:hover {
-      background-color: #555;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    /* width */
+    &::-webkit-scrollbar {
+      width: 5px;
+      background-color: transparent;
+    }
+    /* Track */
+    &::-webkit-scrollbar-track {
+      background-color: transparent;
+    }
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+      background-color: #888;
       transition: all 0.9s ease-out;
+      &:hover {
+        background-color: #555;
+        transition: all 0.9s ease-out;
+      }
     }
   }
 
@@ -106,6 +108,7 @@ onMounted(() => {
   --green: #00e097;
 
   --lightblue: #ebeff7;
+  --lightblue-subtle: #cacfd8;
   --lightblue-alt: #8d99ae;
 
   &.light {
@@ -119,6 +122,7 @@ onMounted(() => {
     --third-color: #8e9aaf;
 
     --btn-border-color: #323635;
+
     color: #030f10;
   }
   &.dark {
@@ -127,7 +131,7 @@ onMounted(() => {
     --third-bg-color: #595d60;
     --main-color: #fff;
     --secondary-color: #b0b7c5;
-    --third-color: #8e9aaf;
+    --third-color: #868c97;
     --btn-border-color: #323635;
     color: #fff;
   }
@@ -162,6 +166,77 @@ onMounted(() => {
         &:hover {
           background-color: transparent;
           color: var(--primary-color);
+        }
+      }
+
+      &.reverse {
+        p {
+          color: var(--main-bg-color);
+        }
+        .icon {
+          fill: var(--main-bg-color);
+        }
+
+        &:hover {
+          background-color: rgb(217, 224, 235);
+          cursor: pointer;
+        }
+      }
+
+      &.confirm {
+        background-color: var(--green);
+        border: none;
+        .icon {
+          transition: all 0.2s ease-out;
+          fill: var(--main-bg-color);
+          width: 1rem;
+        }
+        &.noColor {
+          background-color: transparent;
+        }
+
+        &:hover {
+          background-color: var(--secondary-color);
+        }
+      }
+      &.cancel {
+        background-color: var(--lightblue);
+        border: none;
+        p {
+          transition: all 0.2s ease-out;
+          color: var(--main-bg-color);
+          font-weight: 500;
+        }
+        .icon {
+          transition: all 0.2s ease-out;
+          fill: var(--main-bg-color);
+          width: 1rem;
+        }
+
+        &:hover {
+          background-color: var(--red);
+          opacity: 0.9;
+
+          p {
+            color: var(--main-color);
+          }
+          .icon {
+            fill: var(--main-color);
+          }
+        }
+      }
+      &.primaryColor {
+        background-color: var(--lightblue);
+        .icon {
+          fill: var(--main-bg-color);
+          width: 1rem;
+        }
+        p {
+          color: var(--main-bg-color);
+          font-weight: 500;
+        }
+        &:hover {
+          background-color: var(--primary-color);
         }
       }
       &:hover {

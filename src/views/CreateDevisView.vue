@@ -36,7 +36,7 @@
                 <p>Retourner à l'accueil</p>
               </div>
             </a>
-            <a href="#">
+            <a @click="emits('startForm')">
               <div class="btn">
                 <p>Créer mon devis</p>
                 <Icon name="clock" />
@@ -99,7 +99,7 @@ onMounted(() => {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
 
   header {
     position: absolute;
