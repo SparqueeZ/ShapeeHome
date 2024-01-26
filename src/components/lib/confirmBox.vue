@@ -15,16 +15,24 @@
           </p>
         </div>
         <footer>
-          <a v-if="props.confirmBtn" :href="props.confirmURL">
+          <a
+            @click="handleCancel"
+            v-if="props.rightBtn"
+            :href="checkURL(props.rightURL)"
+          >
             <div class="btn reverse cancel">
-              <p>{{ props.confirmBtn }}</p>
-              <Icon :name="props.confirmIcon" />
+              <p>{{ props.rightBtn }}</p>
+              <Icon :name="props.rightIcon" />
             </div>
           </a>
-          <a @click="handleCancel" v-if="props.cancelBtn">
+          <a
+            @click="handleContinue"
+            v-if="props.leftBtn"
+            :href="checkURL(props.leftURL)"
+          >
             <div class="btn reverse confirm primaryColor">
-              <p>{{ props.cancelBtn }}</p>
-              <Icon :name="props.cancelIcon" />
+              <p>{{ props.leftBtn }}</p>
+              <Icon :name="props.leftIcon" />
             </div>
           </a>
         </footer>
@@ -36,24 +44,36 @@
 <script setup>
 import Icon from "./Icon.vue";
 import { ref, onMounted } from "vue";
-const emit = defineEmits("cancel");
+const emit = defineEmits();
 const props = defineProps({
   tryToLeave: Boolean,
   title: String,
   message: String,
   infosIcon: String,
-  confirmBtn: String,
-  cancelBtn: String,
-  confirmURL: String,
-  cancelURL: String,
-  confirmIcon: String,
-  cancelIcon: String,
+  rightBtn: String,
+  leftBtn: String,
+  rightURL: String,
+  leftURL: String,
+  rightIcon: String,
+  leftIcon: String,
 });
+
+const checkURL = (URL) => {
+  if (!URL || URL === "#") {
+    return "#";
+  } else return URL;
+};
 
 const handleCancel = () => {
   tryToLeaveChild.value = false;
   setTimeout(() => {
-    emit("handleCancel");
+    emit("btnLeft");
+  }, 100);
+};
+const handleContinue = () => {
+  tryToLeaveChild.value = false;
+  setTimeout(() => {
+    emit("btnRight");
   }, 100);
 };
 

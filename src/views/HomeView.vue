@@ -269,6 +269,8 @@ main {
 
   .page {
     position: relative;
+    // Smooth scroll vers les éléments de la page
+    scroll-behavior: smooth;
 
     .reduced {
       width: 70%;

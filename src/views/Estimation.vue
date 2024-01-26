@@ -5,17 +5,36 @@
         v-if="tryToLeaveParent"
         :tryToLeave="tryToLeaveParent"
         title="Etes-vous sûr de vouloir quitter ?"
-        message="En quittant cette page, votre progressions sera sauvegardée, et
-    vous pourrez revenir plus tard."
+        message="En quittant cette page, votre progression sera sauvegardée, et
+          vous pourrez revenir plus tard."
         infosIcon="warning"
-        confirmBtn="Quitter"
-        confirmURL="/"
-        confirmIcon="cancel"
-        cancelBtn="Continuer"
-        cancelURL=""
-        cancelIcon="arrow"
-        @handleCancel="handleCancel"
-    /></Transition>
+        rightBtn="Quitter"
+        rightURL="/"
+        rightIcon="cancel"
+        leftBtn="Continuer"
+        leftURL=""
+        leftIcon="arrow"
+        @btnLeft="handleQuit"
+        @btnRight="handleStay"
+      />
+    </Transition>
+    <Transition name="reduceOpacity">
+      <confirmBox
+        v-if="askToContinue"
+        :tryToLeave="askToContinue"
+        title="Souhaitez-vous reprendre ?"
+        message="Si vous voulez reprendre votre progression là où vous vous êtes arrêté, veuillez cliquer sur 'Continuer'."
+        infosIcon="warning"
+        rightBtn="Recommencer"
+        rightURL=""
+        rightIcon="cancel"
+        leftBtn="Continuer"
+        leftURL=""
+        leftIcon="arrow"
+        @btnLeft="handleRestartForm"
+        @btnRight="handleContinueForm"
+      />
+    </Transition>
     <header>
       <SwitchColorScheme
         :colorScheme="colorScheme"
@@ -30,7 +49,7 @@
       <step0
         v-if="step === 0"
         @saveChoice="saveChoice"
-        @startForm="determineStepTransition(step + 1)"
+        @startForm="determineStepTransition(step + 1), saveChoice()"
       />
       <step1 v-if="step === 1" @saveChoice="saveChoice" />
       <step2 v-else-if="step === 2" />
@@ -45,28 +64,30 @@
       <step11 v-else-if="step === 11" />
       <step12 v-else-if="step === 12" />
     </TransitionGroup>
-    <footer v-if="step >= 1">
-      <div class="actionsBtn">
-        <a @click="determineStepTransition(step - 1)">
-          <div class="btn alt">
-            <p>Retour en arrière</p>
-          </div>
-        </a>
-        <a @click="determineStepTransition(step + 1)">
-          <div class="btn">
-            <p>Continuer</p>
-            <Icon name="boxedArrow" />
-          </div>
-        </a>
-      </div>
-    </footer>
+    <TransitionGroup name="footerAppear">
+      <footer v-if="step >= 1">
+        <div class="actionsBtn">
+          <a @click="determineStepTransition(step - 1)">
+            <div class="btn alt">
+              <p>Retour en arrière</p>
+            </div>
+          </a>
+          <a @click="determineStepTransition(step + 1)">
+            <div class="btn">
+              <p>Continuer</p>
+              <Icon name="boxedArrow" />
+            </div>
+          </a>
+        </div>
+      </footer>
+    </TransitionGroup>
   </main>
 </template>
 
 <script setup>
 import confirmBox from "@/components/lib/confirmBox.vue";
 import SwitchColorScheme from "@/components/header/SwitchColorScheme.vue";
-import step0 from "@/views/CreateDevisView.vue";
+import step0 from "@/components/estimation/step0.vue";
 import step1 from "@/components/estimation/step1.vue";
 import step2 from "@/components/estimation/step2.vue";
 import step3 from "@/components/estimation/step3.vue";
@@ -87,12 +108,15 @@ const props = defineProps({
 });
 
 const tryToLeaveParent = ref(false);
+const askToContinue = ref(false);
 const step = ref(0);
 const stepTransition = ref("stepTransition");
 
 const determineStepTransition = (newStep) => {
   if (newStep < 0) {
     tryToLeaveParent.value = true;
+  }
+  if (step.value === 0) {
   }
   if (newStep >= -1 && newStep <= 12) {
     if (newStep >= step.value) {
@@ -112,8 +136,10 @@ const determineStepTransition = (newStep) => {
 const saveChoice = (step, value) => {
   const localStorageItem = JSON.parse(localStorage.getItem("devis"));
   if (localStorageItem) {
-    localStorageItem[step].selected = value;
-    localStorage.setItem("devis", JSON.stringify(localStorageItem));
+    if (step && value) {
+      localStorageItem[step].selected = value;
+      localStorage.setItem("devis", JSON.stringify(localStorageItem));
+    } else return;
   } else {
     const choiceResumeNew = [
       { created: "25/01/2024" },
@@ -133,22 +159,46 @@ const saveChoice = (step, value) => {
     localStorage.setItem("devis", JSON.stringify(choiceResumeNew));
   }
 };
-const handleCancel = () => {
+const handleQuit = () => {
   tryToLeaveParent.value = false;
+};
+const handleStay = () => {
+  tryToLeaveParent.value = false;
+  stepTransition.value = "stepTransition";
+  loadLatestStep();
+};
+
+const handleContinueForm = () => {
+  askToContinue.value = false;
+  loadLatestStep();
+};
+
+const handleRestartForm = () => {
+  askToContinue.value = false;
+  localStorage.removeItem("devis");
+};
+
+const loadLatestStep = () => {
+  let localStorageItem = JSON.parse(localStorage.getItem("devis"));
+  if (localStorageItem) {
+    let i = 0;
+    localStorageItem.forEach((step) => {
+      if (step.selected === 0) {
+        i += 1;
+      }
+    });
+    step.value = 13 - i;
+  }
+};
+
+const continueBox = () => {
+  askToContinue.value = true;
 };
 
 onMounted(() => {
-  // let localStorageItem = localStorage.getItem("devis");
-  // if (localStorageItem) {
-  //   localStorageItem = JSON.parse(localStorageItem);
-  //   let i = 0;
-  //   localStorageItem.forEach((step) => {
-  //     if (step.selected === 0) {
-  //       i += 1;
-  //     }
-  //   });
-  //   step.value = 13 - i;
-  // }
+  //loadLatestStep();
+  let localStorageItem = JSON.parse(localStorage.getItem("devis"));
+  if (localStorageItem && localStorageItem[1].selected !== 0) continueBox();
 });
 </script>
 
@@ -219,5 +269,15 @@ main {
 .reduceOpacity-enter-from,
 .reduceOpacity-leave-to {
   opacity: 0;
+}
+
+.footerAppear-enter-active,
+.footerAppear-leave-active {
+  transition: all 0.2s ease-in-out;
+}
+.footerAppear-enter-from,
+.footerAppear-leave-to {
+  opacity: 0;
+  transform: translateX(4rem);
 }
 </style>

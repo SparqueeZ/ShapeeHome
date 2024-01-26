@@ -77,11 +77,29 @@ onMounted(() => {
 }
 
 .page {
-  position: absolute;
+  background-color: var(--main-bg-color);
+  color: var(--main-color);
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  overflow: hidden;
+
+  h1 {
+    position: absolute;
+    text-align: center;
+    font-weight: 500;
+    font-size: 64px;
+    transition: top 1s ease-in-out, scale 1s ease-in-out, opacity 1s ease-in-out;
+    top: 50%;
+
+    &.top100 {
+      top: 100px;
+      scale: 0.9;
+    }
+  }
 
   .estimateContent {
     text-align: center;

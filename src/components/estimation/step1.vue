@@ -70,9 +70,9 @@ const choiceList = ref([
 ]);
 
 onMounted(() => {
-  let saveDevis = localStorage.getItem("devis");
-  if (saveDevis) {
-    saveDevis = JSON.parse(saveDevis);
+  let saveDevis = JSON.parse(localStorage.getItem("devis"));
+  console.log(saveDevis);
+  if (saveDevis && saveDevis[1].selected !== 0) {
     choice.value = saveDevis[1];
     document.getElementById(`choice${saveDevis[1].selected}`).click();
   }
