@@ -10,29 +10,31 @@
         infosIcon="warning"
         rightBtn="Quitter"
         rightURL="/"
-        rightIcon="cancel"
+        rightIcon=""
         leftBtn="Continuer"
         leftURL=""
-        leftIcon="arrow"
+        leftIcon=""
         @btnLeft="handleQuit"
         @btnRight="handleStay"
+        @btnLeave="handleStay"
       />
     </Transition>
     <Transition name="reduceOpacity">
       <confirmBox
         v-if="askToContinue"
         :tryToLeave="askToContinue"
-        title="Souhaitez-vous reprendre ?"
-        message="Si vous voulez reprendre votre progression là où vous vous êtes arrêté, veuillez cliquer sur 'Continuer'."
+        title="Voulez-vous reprendre là où vous vous êtes arrêté ?"
+        message='Appuyez sur " Continuer " pour reprendre votre progression, ou sur " Recommencer " pour recommencer depuis 0.'
         infosIcon="warning"
         rightBtn="Recommencer"
         rightURL=""
-        rightIcon="cancel"
+        rightIcon=""
         leftBtn="Continuer"
         leftURL=""
-        leftIcon="arrow"
+        leftIcon=""
         @btnLeft="handleRestartForm"
         @btnRight="handleContinueForm"
+        @btnLeave="handleContinueForm"
       />
     </Transition>
     <header>
@@ -50,9 +52,10 @@
         v-if="step === 0"
         @saveChoice="saveChoice"
         @startForm="determineStepTransition(step + 1), saveChoice()"
+        @leave="tryToLeaveParent = true"
       />
       <step1 v-if="step === 1" @saveChoice="saveChoice" />
-      <step2 v-else-if="step === 2" />
+      <step2 v-else-if="step === 2" @saveChoice="saveChoice" />
       <step3 v-else-if="step === 3" />
       <step4 v-else-if="step === 4" />
       <step5 v-else-if="step === 5" />
@@ -67,13 +70,13 @@
     <TransitionGroup name="footerAppear">
       <footer v-if="step >= 1">
         <div class="actionsBtn">
-          <a @click="determineStepTransition(step - 1)">
+          <a @click="determineStepTransition(step - 1, 'return')">
             <div class="btn alt">
               <p>Retour en arrière</p>
             </div>
           </a>
           <a @click="determineStepTransition(step + 1)">
-            <div class="btn">
+            <div class="btn" :class="choice === 0 ? 'disabled' : ''">
               <p>Continuer</p>
               <Icon name="boxedArrow" />
             </div>
@@ -110,23 +113,30 @@ const props = defineProps({
 const tryToLeaveParent = ref(false);
 const askToContinue = ref(false);
 const step = ref(0);
+const choice = ref(0);
 const stepTransition = ref("stepTransition");
 
-const determineStepTransition = (newStep) => {
+const determineStepTransition = (newStep, type) => {
+  console.log(choice.value, step.value);
   if (newStep < 0) {
     tryToLeaveParent.value = true;
   }
   if (step.value === 0) {
+  }
+  if (step.value !== 0 && choice.value === 0 && type !== "return") {
+    return;
   }
   if (newStep >= -1 && newStep <= 12) {
     if (newStep >= step.value) {
       stepTransition.value = "stepTransition";
       console.log(stepTransition.value);
       step.value = newStep;
+      choice.value = 0;
     } else {
       stepTransition.value = "stepTransitionReverse";
       console.log(stepTransition.value);
       step.value = newStep;
+      choice.value = 0;
     }
   } else {
     console.warn("Vous ne pouvez pas naviguer plus loin.");
@@ -135,6 +145,7 @@ const determineStepTransition = (newStep) => {
 
 const saveChoice = (step, value) => {
   const localStorageItem = JSON.parse(localStorage.getItem("devis"));
+  if (value) choice.value = value;
   if (localStorageItem) {
     if (step && value) {
       localStorageItem[step].selected = value;
@@ -225,6 +236,7 @@ main {
     padding: 1rem;
     display: flex;
     justify-content: end;
+    background-color: var(--main-bg-color);
 
     .actionsBtn {
       display: flex;

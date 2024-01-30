@@ -3,40 +3,32 @@
     <TransitionGroup name="confirmBox">
       <div v-if="tryToLeaveChild" class="confirmBox">
         <header>
-          <div class="iconContainer">
-            <Icon :name="props.infosIcon" />
-          </div>
-          <div @click="handleLeave" class="leaveIcon">
-            <Icon name="cancel" />
-          </div>
-        </header>
-        <div class="infosContainer">
           <p class="title">
             {{ props.title }}
           </p>
-          <p class="description">
+          <!-- <a @click="handleCancel"><Icon name="cancel" /></a> -->
+        </header>
+        <div class="infos">
+          <Icon :name="props.infosIcon" />
+          <p class="message">
             {{ props.message }}
           </p>
         </div>
         <footer>
           <a
-            v-if="props.rightBtn"
             @click="handleCancel"
+            v-if="props.rightBtn"
             :href="checkURL(props.rightURL)"
           >
-            <div class="btn light">
+            <div class="btn reverse cancel">
               <p>{{ props.rightBtn }}</p>
-              <Icon v-if="props.rightIcon" :name="props.rightIcon" />
+              <Icon :name="props.rightIcon" />
             </div>
           </a>
-          <a
-            v-if="props.leftBtn"
-            @click="handleContinue"
-            :href="checkURL(props.leftURL)"
-          >
-            <div class="btn light primary">
+          <a v-if="props.leftBtn" :href="checkURL(props.leftURL)">
+            <div class="btn reverse confirm">
               <p>{{ props.leftBtn }}</p>
-              <Icon v-if="props.leftIcon" :name="props.leftIcon" />
+              <Icon :name="props.leftIcon" />
             </div>
           </a>
         </footer>
@@ -80,12 +72,6 @@ const handleContinue = () => {
     emit("btnRight");
   }, 100);
 };
-const handleLeave = () => {
-  tryToLeaveChild.value = false;
-  setTimeout(() => {
-    emit("btnLeave");
-  }, 100);
-};
 
 const tryToLeaveChild = ref(false);
 
@@ -126,81 +112,55 @@ onMounted(() => {
   .confirmBox {
     background-color: var(--main-color);
     padding: 2rem;
-    width: calc(440px - 4rem);
+    width: calc(30% - 4rem);
     min-height: fit-content;
-    min-width: 440px;
     border-radius: 0.5rem;
     position: relative;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
     header {
+      width: 100%;
+      min-height: 20px;
       display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 60px;
-      position: relative;
-      .iconContainer {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100%;
-        width: 60px;
-        border-radius: 50%;
-        background-color: var(--orange);
-        .icon {
-          fill: #fff;
-          height: 30px;
-        }
-      }
-      .leaveIcon {
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: pointer;
-
-        .icon {
-          transition: all 0.2s ease-out;
-          display: block;
-          width: 15px;
-          height: 15px;
-          fill: var(--main-bg-color);
-        }
-        &:hover {
-          .icon {
-            scale: 0.9;
-          }
-        }
-      }
-    }
-
-    .infosContainer {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
+      align-items: start;
+      justify-content: space-between;
       .title {
         font-size: 1.4rem;
         font-weight: 700;
-        font-family: "Nohemi";
+        text-transform: uppercase;
       }
-      .description {
-        font-size: 0.95rem;
+
+      .icon {
+        display: block;
+        width: 15px;
+        height: 15px;
+        fill: var(--main-bg-color);
+        cursor: pointer;
+        transition: 0.2s all ease-out;
+        &:hover {
+          rotate: 90deg;
+        }
+      }
+    }
+    .infos {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 0;
+
+      .icon {
+        height: 4rem;
+        fill: var(--orange);
       }
     }
 
     footer {
       display: flex;
-      justify-content: space-between;
-      a {
-        width: 45%;
-      }
+      justify-content: end;
+      gap: 1rem;
+
       .btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        p {
-          font-weight: 700;
-        }
+        text-decoration: none;
+        fill: var(--main-color);
       }
     }
   }

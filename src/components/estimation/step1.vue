@@ -89,21 +89,24 @@ onMounted(() => {
   overflow: hidden;
 
   .choiceContainer {
-    height: 80%;
+    // height: 80%;
     width: 100%;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
     justify-content: center;
     align-items: center;
     gap: 3rem;
     padding: 2rem;
+    overflow-y: auto;
 
     .choiceItem {
-      height: 100%;
-      width: 25%;
-      max-width: 420px;
+      // height: 100%;
+      // width: 25%;
+      max-width: 400px;
       display: flex;
+
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -115,7 +118,7 @@ onMounted(() => {
         display: flex;
         flex-direction: column;
         gap: 1rem;
-        padding: 2rem 3rem;
+        padding: 3rem 2rem;
         position: relative;
         overflow: hidden;
 
@@ -130,9 +133,8 @@ onMounted(() => {
 
         .imgContainer {
           width: 100%;
-          height: 70%;
           img {
-            max-height: 100%;
+            height: auto;
             aspect-ratio: 1/1;
           }
         }
@@ -147,7 +149,7 @@ onMounted(() => {
 
           h2 {
             font-weight: 800;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-family: "Montserrat";
           }
 
@@ -174,7 +176,7 @@ onMounted(() => {
           .description {
             margin-top: 0.5rem;
             font-family: "Montserrat";
-            font-size: 1rem;
+            font-size: 0.9rem;
           }
         }
 
@@ -237,7 +239,6 @@ onMounted(() => {
         display: block;
         background: var(--main-bg-color);
         border-radius: 0.5rem;
-        padding: 1rem;
         text-align: center;
         // box-shadow: 0px 3px 10px -2px hsla(150, 5%, 65%, 0.5);
         box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),

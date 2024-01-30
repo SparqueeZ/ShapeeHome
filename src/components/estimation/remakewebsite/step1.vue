@@ -1,5 +1,5 @@
 <template>
-  <div>Créer une application web</div>
+  <div>Refonte de site internet</div>
 </template>
 
 <script setup></script>
