@@ -155,7 +155,7 @@ const saveChoice = (step, value) => {
     const choiceResumeNew = [
       { created: "25/01/2024" },
       { selected: 0 },
-      { selected: 0 },
+      [{ selected: 0 }, { selected: 0 }, { selected: 0 }],
       { selected: 0 },
       { selected: 0 },
       { selected: 0 },

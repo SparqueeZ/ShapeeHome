@@ -3,11 +3,11 @@
     <article v-for="choice in choiceList" class="choiceItem">
       <input
         type="radio"
-        name="choice"
-        :id="`choice${choice.choiceNumber}`"
+        name="choiceCreateWebSite"
+        :id="`choiceCreateWebSite${choice.choiceNumber}`"
         @click="emit('saveChoice', 1, Number(choice.choiceNumber))"
       />
-      <label :for="`choice${choice.choiceNumber}`">
+      <label :for="`choiceCreateWebSite${choice.choiceNumber}`">
         <div class="imgContainer">
           <img :src="choice.img" :alt="choice.imgAlt" />
         </div>
@@ -25,13 +25,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import Icon from "@/components/lib/Icon.vue";
 import choice1 from "@/assets/img/choice1.png";
 import choice2 from "@/assets/img/choice2.png";
 import choice3 from "@/assets/img/choice3.png";
 const emit = defineEmits();
 const props = defineProps({});
+
+const choiceCreateWebSite = ref(0);
 
 const choiceList = ref([
   {
@@ -59,12 +61,22 @@ const choiceList = ref([
     description:
       "Besoin d'un coup de pinceau sur votre site internet ? N'attendez plus !",
     timing: "2 min.",
-    choiceNumber: "2",
+    choiceNumber: "3",
     img: choice3,
     imgAlt:
       "Image d'une personne levant le doigt de la main gauche tout en tenant un cahier dans la main droite pour faire comprendre qu'il cherche son chemin, et derrière lui se trouve des pancartes.",
   },
 ]);
+
+onMounted(() => {
+  let saveDevis = JSON.parse(localStorage.getItem("devis"));
+  if (saveDevis && saveDevis[2][0].selected !== 0) {
+    choiceCreateWebSite.value = saveDevis[2][0];
+    document
+      .getElementById(`choiceCreateWebSite${saveDevis[2][0].selected}`)
+      .click();
+  }
+});
 </script>
 
 <style lang="scss" scoped>

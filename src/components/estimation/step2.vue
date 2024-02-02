@@ -43,9 +43,9 @@ import remakeWebSite from "./remakewebsite/step1.vue";
 import createWebApp from "./createwebapp/step1.vue";
 import { ref, onMounted } from "vue";
 
-const step = ref(0);
+const step = ref(1);
 const stepTransition = ref("stepTransition");
-const choice = ref(1);
+const choice = ref(0);
 const emit = defineEmits();
 const localStorageDevis = ref(JSON.parse(localStorage.getItem("devis")));
 
@@ -81,11 +81,26 @@ const saveChoice = (step, value) => {
   if (value) choice.value = value;
   if (localStorageItem) {
     if (step && value) {
-      localStorageItem[step].selected = value;
+      localStorageItem[2][step - 1].selected = value;
       localStorage.setItem("devis", JSON.stringify(localStorageItem));
     } else return;
   } else {
-    console.error("Erreur lors de la save en localStorage.");
+    const choiceResumeNew = [
+      { created: "25/01/2024" },
+      { selected: 0 },
+      [{ selected: 0 }, { selected: 0 }, { selected: 0 }],
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+      { selected: 0 },
+    ];
+    localStorage.setItem("devis", JSON.stringify(choiceResumeNew));
   }
 };
 </script>
