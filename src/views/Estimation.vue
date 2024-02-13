@@ -209,7 +209,7 @@ const continueBox = () => {
 onMounted(() => {
   //loadLatestStep();
   let localStorageItem = JSON.parse(localStorage.getItem("devis"));
-  if (localStorageItem && localStorageItem[1].selected !== 0) continueBox();
+  // if (localStorageItem && localStorageItem[1].selected !== 0) continueBox();
 });
 </script>
 
