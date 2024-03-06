@@ -246,6 +246,11 @@ const sendContactForm = () => {
           grid-area: lastname;
         }
       }
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
     }
 
     .contactInfos {
@@ -261,6 +266,11 @@ const sendContactForm = () => {
 
       .email {
         grid-area: email;
+      }
+      @media (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
       }
     }
 
@@ -338,6 +348,27 @@ const sendContactForm = () => {
         }
       }
     }
+    @media (max-width: 768px) {
+      gap: 1rem;
+    }
+  }
+
+  /* Large desktop screens */
+  @media (min-width: 1440px) {
+  }
+  /* Small desktop screens */
+  @media (min-width: 1440px) and (max-width: 1440px) {
+  }
+  /* Tablet screens */
+  @media (min-width: 1024px) and (max-width: 1440px) {
+  }
+  /* Mobile screens (landscape) */
+  @media (min-width: 768px) and (max-width: 1024px) {
+  }
+  /* Mobile screens (portrait) */
+  @media (max-width: 768px) {
+    width: 80% !important;
+    padding: 1rem;
   }
 }
 </style>

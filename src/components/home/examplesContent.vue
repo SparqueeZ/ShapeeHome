@@ -154,6 +154,16 @@ import Icon from "../lib/Icon.vue";
         }
       }
     }
+    /* Mobile screens (portrait) */
+    @media (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .example {
+        width: 100%;
+        height: 10rem;
+      }
+    }
   }
 }
 </style>

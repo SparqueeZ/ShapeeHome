@@ -80,7 +80,7 @@ onMounted(() => {
     choice.value = saveDevis[props.step];
     document.getElementById(`${choiceName}${saveDevis[props.step]}`).click();
   }
-  console.log("Etape actuelle :", props.step);
+  // console.log("Etape actuelle :", props.step);
 });
 </script>
 

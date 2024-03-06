@@ -54,6 +54,10 @@ const tools = ref([
         margin: 0;
       }
     }
+    /* Mobile screens (portrait) */
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
   }
 }
 </style>

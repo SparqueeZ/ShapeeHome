@@ -53,7 +53,7 @@
         v-if="step === 0"
         @saveChoice="saveChoice"
         @startForm="
-          step += 1;
+          determineNextStep('up');
           stepTransition = 'stepTransition';
           saveChoice(true, 0);
         "
@@ -81,7 +81,7 @@
             </div>
           </a>
           <a @click="determineNextStep('up')">
-            <div class="btn">
+            <div class="btn" :class="disabledBtn ? 'disabled' : ''">
               <p>Continuer</p>
               <Icon name="boxedArrow" />
             </div>
@@ -126,6 +126,7 @@ const step = ref(0);
 const stepTransition = ref("stepTransition");
 const nextStep = ref(0);
 const previousStep = ref(1);
+const disabledBtn = ref(true);
 
 const baseDevis = ref(
   JSON.stringify([true, null, null, null, null, null, null, null, null])
@@ -145,6 +146,10 @@ const saveChoice = (userChoice, actualStep) => {
     let localStorageItem = JSON.parse(localStorage.getItem("devis"));
     localStorageItem[actualStep] = userChoice;
     localStorage.setItem("devis", JSON.stringify(localStorageItem));
+    console.log(localStorageItem[step.value]);
+    if (localStorageItem[step.value]) {
+      disabledBtn.value = false;
+    } else disabledBtn.value = true;
   }
 };
 
@@ -152,9 +157,13 @@ const saveChoice = (userChoice, actualStep) => {
 const determineNextStep = (direction) => {
   saveChoice();
   let localStorageItem = JSON.parse(localStorage.getItem("devis"));
+  disabledBtn.value = false;
 
   if (direction === "up") {
-    console.log("Prochaine étape.");
+    if (localStorageItem[step.value + 1]) {
+      disabledBtn.value = false;
+    } else disabledBtn.value = true;
+    // console.log("Prochaine étape.");
     stepTransition.value = "stepTransition";
     // previousStep.value = step.value;
     // step.value += step.value;
@@ -219,8 +228,11 @@ const continueBox = () => {
 
 onMounted(() => {
   let localStorageItem = JSON.parse(localStorage.getItem("devis"));
-  if (localStorageItem && localStorageItem[1] !== 0) {
+  if (localStorageItem && localStorageItem[1] !== null) {
     continueBox();
+  }
+  if (step.value === 0) {
+    disabledBtn.value = false;
   }
 });
 </script>

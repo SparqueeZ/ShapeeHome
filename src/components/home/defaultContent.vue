@@ -199,5 +199,17 @@ onMounted(() => {});
       font-size: 14px;
     }
   }
+  /* Mobile screens (portrait) */
+  @media (max-width: 768px) {
+    display: block;
+    .imgDisplay {
+      img {
+        width: 100%;
+      }
+    }
+    .textDisplay {
+      margin-top: 1rem;
+    }
+  }
 }
 </style>

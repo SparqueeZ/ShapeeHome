@@ -405,6 +405,15 @@ import Icon from "../lib/Icon.vue";
         }
       }
     }
+
+    /* Mobile screens (portrait) */
+    @media (max-width: 768px) {
+      flex-direction: column;
+      gap: 1rem;
+      .serviceItem {
+        width: 100%;
+      }
+    }
   }
 }
 .stroke {
