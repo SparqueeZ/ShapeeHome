@@ -46,6 +46,13 @@
             </p>
           </Transition>
         </div>
+        <div class="CGU">
+          <input required type="checkbox" name="CGU" id="CGU" />
+          <p>
+            J'accepte que Shapee utilise mes informations personnelles à des fin
+            de contact uniquement.
+          </p>
+        </div>
       </div>
     </form>
   </section>
@@ -336,7 +343,7 @@ const sendContactForm = () => {
       }
     }
     .formMessage {
-      padding: 1rem 1rem 0 1rem;
+      padding: 1rem 1rem 1rem 1rem;
       min-height: 20px;
       p {
         font-family: "Montserrat";
@@ -346,6 +353,14 @@ const sendContactForm = () => {
         &.nok {
           color: #f64d60;
         }
+      }
+    }
+    .CGU {
+      display: flex;
+      align-items: start;
+      p {
+        font-family: "Montserrat";
+        font-size: 12px;
       }
     }
     @media (max-width: 768px) {
